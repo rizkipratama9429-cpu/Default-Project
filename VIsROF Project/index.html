@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinnyrz — Designer & Developer</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Vinnyrz — Designer & Developer crafting digital products people love. Specializing in product design, front-end development, and design systems.">
+  <meta name="keywords" content="designer, developer, product design, front-end, design systems, portfolio">
+  <meta name="author" content="Vinnyrz">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Vinnyrz — Designer & Developer">
+  <meta property="og:description" content="Crafting digital products people love. Product design, front-end development, and design systems.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vinnyrz.com">
+  <meta property="og:image" content="https://vinnyrz.com/og-image.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vinnyrz — Designer & Developer">
+  <meta name="twitter:description" content="Crafting digital products people love. Product design, front-end development, and design systems.">
+  <meta name="twitter:image" content="https://vinnyrz.com/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230A0A0F'/><text x='50' y='68' font-size='50' font-family='sans-serif' font-weight='bold' fill='%2300F0FF' text-anchor='middle'>V</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Analytics (uncomment and add your domain) -->
+  <!-- <script defer data-domain="vinnyrz.com" src="https://plausible.io/js/script.js"></script> -->
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+    <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="5"/>
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    </svg>
+    <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <!-- Edit Toggle -->
+  <button class="edit-toggle" id="editToggle" title="Toggle Edit Mode">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+    </svg>
+  </button>
+
+  <!-- Edit Panel -->
+  <div class="edit-panel" id="editPanel">
+    <div class="edit-panel-header">
+      <h3>Edit Content</h3>
+      <button class="edit-close" id="editClose">&times;</button>
+    </div>
+    <div class="edit-panel-body">
+      <label>Nav Logo Text</label>
+      <input type="text" id="editLogo" maxlength="4" placeholder="V">
+
+      <label>Nav Links (comma separated)</label>
+      <input type="text" id="editLinks" placeholder="About, Work, Writing, Contact">
+
+      <label>Hero Title Line 1</label>
+      <input type="text" id="editHero1" placeholder="Modern personal profil">
+
+      <label>Hero Title Line 2 (accent)</label>
+      <input type="text" id="editHero3" placeholder="Anti ai slop">
+
+      <label>Hero Subtitle</label>
+      <textarea id="editHeroSub" rows="2" placeholder="I'm Vinnyrz — a designer-developer hybrid..."></textarea>
+
+      <label>Marquee Items (comma separated)</label>
+      <input type="text" id="editMarquee" placeholder="Product Design, Front-End, Systems">
+
+      <label>About Lead</label>
+      <textarea id="editAboutLead" rows="2" placeholder="I've spent the last 8 years..."></textarea>
+
+      <label>About Body</label>
+      <textarea id="editAboutBody" rows="3" placeholder="My work lives in the space between..."></textarea>
+
+      <label>Status Text</label>
+      <input type="text" id="editStatus" placeholder="Available for freelance">
+
+      <label>Location</label>
+      <input type="text" id="editLocation" placeholder="Portland, OR">
+
+      <label>Email</label>
+      <input type="text" id="editEmail" placeholder="Hello People's">
+
+      <button class="edit-reset" id="editReset">Reset to Default</button>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo" id="navLogo" contenteditable="false">V</a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#writing" class="nav-link">Writing</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta magnetic">Let's talk</a>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-meta">
+      <span class="hero-status"><span class="status-dot"></span><span id="statusText">Available for freelance</span></span>
+      <span class="hero-location" id="locationText">Portland, OR</span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title" id="heroTitle">
+          <span class="line" id="heroLine1">Modern personal profil</span>
+          <span class="line"><em id="heroLine3">Anti ai slop</em></span>
+        </h1>
+        <p class="hero-sub" id="heroSub">I'm Vinnyrz — a designer-developer hybrid who cares about the details most people never notice but everyone feels.</p>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-placeholder">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <path d="M21 15l-5-5L5 21"/>
+          </svg>
+          <span>Your Photo</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+    <div class="hero-corner hero-corner-tl"></div>
+    <div class="hero-corner hero-corner-br"></div>
+  </header>
+
+  <!-- Marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>Product Design</span><span class="sep">✦</span>
+      <span>Front-End Development</span><span class="sep">✦</span>
+      <span>Design Systems</span><span class="sep">✦</span>
+      <span>Prototyping</span><span class="sep">✦</span>
+      <span>Creative Direction</span><span class="sep">✦</span>
+      <span>Product Design</span><span class="sep">✦</span>
+      <span>Front-End Development</span><span class="sep">✦</span>
+      <span>Design Systems</span><span class="sep">✦</span>
+      <span>Prototyping</span><span class="sep">✦</span>
+      <span>Creative Direction</span><span class="sep">✦</span>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="section-label"><span class="label-num">01</span> About</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="about-lead" id="aboutLead">I've spent the last 8 years at the intersection of design and code — where most people see a handoff, I see a conversation.</p>
+        <p id="aboutBody">My work lives in the space between what something looks like and how it actually works. I believe good design is invisible until it's missing, and great engineering is the same.</p>
+        <p>When I'm not pushing pixels or commits, I'm probably out shooting film photography or hunting for the best espresso in the city.</p>
+      </div>
+      <div class="about-facts">
+        <div class="fact">
+          <span class="fact-num">8+</span>
+          <span class="fact-label">Years experience</span>
+        </div>
+        <div class="fact">
+          <span class="fact-num">47</span>
+          <span class="fact-label">Projects shipped</span>
+        </div>
+        <div class="fact">
+          <span class="fact-num">12</span>
+          <span class="fact-label">Design awards</span>
+        </div>
+        <div class="fact">
+          <span class="fact-num">∞</span>
+          <span class="fact-label">Cups of coffee</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section section-alt" id="skills">
+    <div class="section-label"><span class="label-num">02</span> Expertise</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="16" cy="16" r="12"/>
+            <path d="M16 4v24M4 16h24"/>
+          </svg>
+        </div>
+        <h3>Product Design</h3>
+        <p>From zero to one. I take products from fuzzy ideas to polished interfaces through rapid prototyping, user testing, and iterative refinement.</p>
+        <ul class="skill-tags">
+          <li>Figma</li><li>Prototyping</li><li>User Research</li><li>Wireframing</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="4" y="4" width="24" height="24" rx="2"/>
+            <path d="M9 12l-3 4 3 4M23 12l3 4-3 4M17 10l-4 12"/>
+          </svg>
+        </div>
+        <h3>Front-End</h3>
+        <p>Clean, performant, accessible code. I build interfaces that feel as good as they look — fast, responsive, and built to last.</p>
+        <ul class="skill-tags">
+          <li>HTML/CSS</li><li>JavaScript</li><li>React</li><li>Animation</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="4" y="4" width="10" height="10"/>
+            <rect x="18" y="4" width="10" height="10"/>
+            <rect x="4" y="18" width="10" height="10"/>
+            <rect x="18" y="18" width="10" height="10"/>
+          </svg>
+        </div>
+        <h3>Design Systems</h3>
+        <p>Scalable, consistent, and documented. I create the infrastructure that lets teams ship better products faster.</p>
+        <ul class="skill-tags">
+          <li>Tokens</li><li>Components</li><li>Documentation</li><li>Governance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section class="section" id="work">
+    <div class="section-label"><span class="label-num">03</span> Selected Work</div>
+    <div class="work-list">
+      <a href="https://www.behance.net/search/projects/meridian%20fintech" target="_blank" rel="noopener" class="work-item">
+        <div class="work-thumb">
+          <div class="thumb-placeholder" style="background: linear-gradient(135deg, #00F0FF22, #00F0FF08);">
+            <span>Meridian</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <span class="work-year">2025</span>
+          <h3 class="work-title">Meridian — Fintech Platform</h3>
+          <p class="work-desc">Complete redesign of a banking platform serving 2M+ users. Increased task completion by 34%.</p>
+        </div>
+        <div class="work-meta">
+          <span class="work-role">Lead Designer</span>
+          <span class="work-arrow">→</span>
+        </div>
+      </a>
+      <a href="https://dribbble.com/search/fieldnotes%20editorial%20app" target="_blank" rel="noopener" class="work-item">
+        <div class="work-thumb">
+          <div class="thumb-placeholder" style="background: linear-gradient(135deg, #FF6B3522, #FF6B3508);">
+            <span>Fieldnotes</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <span class="work-year">2024</span>
+          <h3 class="work-title">Fieldnotes — Editorial App</h3>
+          <p class="work-desc">A reading app for long-form journalism. Designed the entire product from brand to interface.</p>
+        </div>
+        <div class="work-meta">
+          <span class="work-role">Design & Build</span>
+          <span class="work-arrow">→</span>
+        </div>
+      </a>
+      <a href="https://dribbble.com/search/arcadia%20design%20system" target="_blank" rel="noopener" class="work-item">
+        <div class="work-thumb">
+          <div class="thumb-placeholder" style="background: linear-gradient(135deg, #00FF8822, #00FF8808);">
+            <span>Arcadia</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <span class="work-year">2024</span>
+          <h3 class="work-title">Arcadia — Design System</h3>
+          <p class="work-desc">Built a multi-brand design system powering 6 products across web and mobile.</p>
+        </div>
+        <div class="work-meta">
+          <span class="work-role">Systems Lead</span>
+          <span class="work-arrow">→</span>
+        </div>
+      </a>
+      <a href="https://dribbble.com/search/pulse%20health%20dashboard" target="_blank" rel="noopener" class="work-item">
+        <div class="work-thumb">
+          <div class="thumb-placeholder" style="background: linear-gradient(135deg, #FFD70022, #FFD70008);">
+            <span>Pulse</span>
+          </div>
+        </div>
+        <div class="work-info">
+          <span class="work-year">2023</span>
+          <h3 class="work-title">Pulse — Health Dashboard</h3>
+          <p class="work-desc">Data visualization for a healthcare startup. Made complex data feel calm and actionable.</p>
+        </div>
+        <div class="work-meta">
+          <span class="work-role">Product Designer</span>
+          <span class="work-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section section-alt" id="testimonials">
+    <div class="section-label"><span class="label-num">04</span> Testimonials</div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Vinnyrz has an incredible ability to see both the big picture and the tiny details. They transformed our entire product experience.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">JD</div>
+          <div class="author-info">
+            <span class="author-name">Jane Doe</span>
+            <span class="author-role">CEO, Meridian</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Working with Vinnyrz was a game-changer. They don't just design — they understand the code behind it too.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MS</div>
+          <div class="author-info">
+            <span class="author-name">Mark Smith</span>
+            <span class="author-role">CTO, Fieldnotes</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">The design system Vinnyrz built for us saved hundreds of hours. Clean, documented, and a joy to use.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AK</div>
+          <div class="author-info">
+            <span class="author-name">Alex Kim</span>
+            <span class="author-role">VP Product, Arcadia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing -->
+  <section class="section" id="writing">
+    <div class="section-label"><span class="label-num">05</span> Writing</div>
+    <div class="writing-grid">
+      <a href="https://medium.com/tag/design%20Systems" target="_blank" rel="noopener" class="writing-card">
+        <span class="writing-date">Oct 2025</span>
+        <h3>The Case for Boring Design</h3>
+        <p>Why the best interfaces are the ones you never think about.</p>
+        <span class="writing-read">Read →</span>
+      </a>
+      <a href="https://dev.to/t/design" target="_blank" rel="noopener" class="writing-card">
+        <span class="writing-date">Aug 2025</span>
+        <h3>Designing with Code, Coding with Design</h3>
+        <p>What I've learned from living in both worlds for 8 years.</p>
+        <span class="writing-read">Read →</span>
+      </a>
+      <a href="https://medium.com/tag/design%20Tools" target="_blank" rel="noopener" class="writing-card">
+        <span class="writing-date">Jun 2025</span>
+        <h3>My 2025 Design Stack</h3>
+        <p>The tools I actually use every day — and the ones I dropped.</p>
+        <span class="writing-read">Read →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact" id="contact">
+    <div class="section-label"><span class="label-num">06</span> Contact</div>
+    <h2 class="contact-title">Have a project<br>in mind?</h2>
+    <p class="contact-sub">I'm currently taking on new projects for Q1 2026.</p>
+
+    <!-- Contact Form -->
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="formName">Name</label>
+          <input type="text" id="formName" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="formEmail">Email</label>
+          <input type="email" id="formEmail" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="formMessage">Message</label>
+        <textarea id="formMessage" name="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit magnetic">
+        <span>Send Message</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+        </svg>
+      </button>
+    </form>
+
+    <div class="contact-divider">
+      <span>or</span>
+    </div>
+
+    <a href="mailto:Hello People's" class="contact-email" id="contactEmail">Hello People's</a>
+    <div class="contact-socials">
+      <a href="https://twitter.com/vinnyrz" target="_blank" rel="noopener" class="social-link">Twitter / X</a>
+      <a href="https://www.linkedin.com/in/vinnyrz" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+      <a href="https://dribbble.com/vinnyrz" target="_blank" rel="noopener" class="social-link">Dribbble</a>
+      <a href="https://github.com/vinnyrz" target="_blank" rel="noopener" class="social-link">GitHub</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>© 2025 Vinnyrz</span>
+    <span>Built with care, not templates.</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
