@@ -391,6 +391,16 @@ a {
   transition: all 0.3s var(--ease-smooth);
   position: relative;
   padding: 0.25rem 0;
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.nav-link:nth-child(1) { animation-delay: 0.1s; }
+.nav-link:nth-child(2) { animation-delay: 0.2s; }
+.nav-link:nth-child(3) { animation-delay: 0.3s; }
+.nav-link:nth-child(4) { animation-delay: 0.4s; }
+
+.nav-link.jello {
+  animation: jello-horizontal 0.9s both;
 }
 
 .nav-link::after {
@@ -459,6 +469,9 @@ a {
   padding: 8rem 3rem 4rem;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--accent-glow) 50%, var(--bg) 100%);
+  background-size: 200% 200%;
+  animation: bg-pan-left 8s ease-in-out infinite alternate;
 }
 
 .hero-grid-bg {
@@ -528,7 +541,7 @@ a {
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.03em;
-  margin-bottom: 2.5rem;
+  margin-bottom: 4rem;
 }
 
 .hero-title .line {
@@ -556,6 +569,10 @@ a {
   text-shadow: var(--glow);
 }
 
+.hero-title.blur-out {
+  animation: text-blur-out 1.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
 @keyframes revealUp {
   from {
     opacity: 0;
@@ -577,9 +594,77 @@ a {
   animation: fadeIn 1s var(--ease-smooth) 0.7s both;
 }
 
+.hero-sub.blur-out {
+  animation: text-blur-out 1.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(25px); filter: blur(4px); }
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes text-blur-out {
+  0% {
+    filter: blur(0.01);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+}
+
+@keyframes bg-pan-left {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes bg-pan-right {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes jello-horizontal {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
 }
 
 .hero-photo {
@@ -601,6 +686,13 @@ a {
   font-size: 0.8rem;
   transition: all 0.4s var(--ease-smooth);
   background: var(--bg-card);
+}
+
+.photo-placeholder:hover {
+  border-color: var(--accent);
+  border-style: solid;
+  box-shadow: var(--glow);
+  transform: scale(1.02);
 }
 
 .photo-placeholder:hover {
@@ -692,14 +784,15 @@ a {
 
 /* ---------- Marquee ---------- */
 .marquee {
-  background: var(--bg-alt);
+  background: linear-gradient(135deg, var(--bg-alt) 0%, var(--accent-glow) 50%, var(--bg-alt) 100%);
+  background-size: 200% 200%;
+  animation: bg-pan-left 8s ease-in-out infinite alternate;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   padding: 1.5rem 0;
   overflow: hidden;
   white-space: nowrap;
   position: relative;
-  transition: background 0.5s var(--ease-smooth);
 }
 
 .marquee::before,
@@ -756,11 +849,27 @@ a {
   padding: 8rem 3rem;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+}
+
+.section::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--accent-glow) 50%, var(--bg) 100%);
+  background-size: 200% 200%;
+  animation: bg-pan-left 8s ease-in-out infinite alternate;
+  z-index: -1;
 }
 
 .section-alt {
   max-width: none;
-  background: var(--bg-alt);
+  background: linear-gradient(135deg, var(--bg-alt) 0%, var(--accent-glow) 50%, var(--bg-alt) 100%);
+  background-size: 200% 200%;
+  animation: bg-pan-left 8s ease-in-out infinite alternate;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   transition: background 0.5s var(--ease-smooth);
@@ -1258,6 +1367,9 @@ a {
 .contact {
   text-align: center;
   padding-bottom: 6rem;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--accent-glow) 50%, var(--bg) 100%);
+  background-size: 200% 200%;
+  animation: bg-pan-left 8s ease-in-out infinite alternate;
 }
 
 .contact .section-label {
@@ -1489,6 +1601,9 @@ a {
   border-top: 1px solid var(--line);
   font-size: 0.8rem;
   color: var(--ink-light);
+  background: linear-gradient(135deg, var(--bg) 0%, var(--accent-glow) 50%, var(--bg) 100%);
+  background-size: 200% 200%;
+  animation: bg-pan-left 8s ease-in-out infinite alternate;
 }
 
 /* ---------- Scroll Reveal ---------- */

@@ -219,22 +219,22 @@
     scrollProgress.style.width = progress + '%';
   }, { passive: true });
 
-  // ---------- Nav: hide on scroll down, show on scroll up ----------
+  // ---------- Nav: hide on scroll down, only show at top ----------
   const nav = document.getElementById('nav');
   let lastScroll = 0;
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
-    if (currentScroll <= 0) {
+    // Only show nav when at the very top
+    if (currentScroll <= 100) {
       nav.classList.remove('hidden');
       return;
     }
 
-    if (currentScroll > lastScroll && currentScroll > 100) {
+    // Hide when scrolling down
+    if (currentScroll > lastScroll) {
       nav.classList.add('hidden');
-    } else {
-      nav.classList.remove('hidden');
     }
 
     lastScroll = currentScroll;
@@ -261,8 +261,21 @@
 
   revealElements.forEach(el => revealObserver.observe(el));
 
-  // ---------- Smooth scroll for nav links ----------
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  // ---------- Smooth scroll for nav links + Jello hover ----------
+  document.querySelectorAll('.nav-link').forEach(anchor => {
+    // Remove slide-in animation after it plays once
+    anchor.addEventListener('animationend', function() {
+      this.style.animation = 'none';
+    });
+
+    // Jello animation on hover
+    anchor.addEventListener('mouseenter', function() {
+      this.classList.remove('jello');
+      void this.offsetWidth; // Force reflow
+      this.classList.add('jello');
+    });
+
+    // Smooth scroll on click
     anchor.addEventListener('click', function(e) {
       const targetId = this.getAttribute('href');
       if (targetId === '#') return;
@@ -275,17 +288,29 @@
     });
   });
 
-  // ---------- Parallax on hero title ----------
+  // ---------- Parallax + Blur-out on hero ----------
   const heroTitle = document.querySelector('.hero-title');
+  const heroSub = document.querySelector('.hero-sub');
   let ticking = false;
 
   window.addEventListener('scroll', () => {
     if (!ticking) {
       window.requestAnimationFrame(() => {
         const scrolled = window.pageYOffset;
-        if (scrolled < window.innerHeight) {
-          heroTitle.style.transform = `translateY(${scrolled * 0.15}px)`;
-          heroTitle.style.opacity = 1 - (scrolled / (window.innerHeight * 0.8));
+
+        // Blur-out animation when reaching the About section
+        const aboutSection = document.getElementById('about');
+        const aboutTop = aboutSection ? aboutSection.offsetTop : window.innerHeight;
+        if (scrolled > aboutTop - window.innerHeight * 0.5) {
+          heroTitle.classList.add('blur-out');
+          heroSub.classList.add('blur-out');
+        } else {
+          heroTitle.classList.remove('blur-out');
+          heroSub.classList.remove('blur-out');
+          // Only apply parallax when not blurred out
+          if (scrolled < window.innerHeight) {
+            heroTitle.style.transform = `translateY(${scrolled * 0.15}px)`;
+          }
         }
         ticking = false;
       });
